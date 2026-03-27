@@ -230,8 +230,8 @@ ul { list-style:none; }
   color:#fff; text-transform:uppercase;
 }
 .hero-brand-mark {
-  width:90px; height:90px;
-  margin-left:4px;
+  height:90px; width:auto;
+  margin-left:8px;
 }
 .hero-brand-sub {
   font-family:var(--bd); font-size:11px; font-weight:500;
@@ -854,17 +854,11 @@ ul { list-style:none; }
       </div>
     </div>
 
-    <!-- Right — JHK wordmark: font text + SVG mark as K -->
+    <!-- Right — JHK: Barlow Condensed text + actual mark extracted from logo -->
     <div class="hero-brand">
       <div class="hero-brand-inner">
-        <span class="hero-brand-jh">JH</span>
-        <svg class="hero-brand-mark" viewBox="0 0 100 100" fill="none">
-          <polygon points="50,4 78,13 96,38 96,62 78,87 50,96 22,87 4,62 4,38 22,13"
-                   stroke="#fff" stroke-width="3.5" fill="rgba(255,255,255,0.06)"/>
-          <polygon points="50,26 74,50 50,74 26,50"
-                   stroke="rgba(255,255,255,0.5)" stroke-width="2.5" fill="none"/>
-          <circle cx="50" cy="50" r="10" fill="#fff"/>
-        </svg>
+        <span class="hero-brand-jh">JHK</span>
+        <img src="jhk-mark.png" alt="" class="hero-brand-mark">
       </div>
       <div class="hero-brand-sub">Group of Companies</div>
     </div>
