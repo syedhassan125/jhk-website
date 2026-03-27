@@ -213,32 +213,17 @@ ul { list-style:none; }
 }
 .hero-btns { display:flex; gap:12px; flex-shrink:0; }
 
-/* Hero brand mark — right side of text band */
+/* Hero brand — actual logo image */
 .hero-brand {
   flex-shrink:0;
-  display:flex; flex-direction:column; align-items:center; gap:16px;
-  opacity:0; animation:fadeUp .9s 1s ease forwards;
   border-left:1px solid rgba(255,255,255,0.08);
-  padding-left:72px;
+  padding-left:64px;
+  opacity:0; animation:fadeUp .9s 1s ease forwards;
 }
-.hero-brand-inner {
-  display:flex; align-items:center; gap:4px;
-}
-.hero-brand-jh {
-  font-family:var(--hd); font-weight:900;
-  font-size:96px; line-height:1; letter-spacing:0.02em;
-  color:#fff;
-  text-shadow:0 0 40px rgba(255,255,255,0.12);
-}
-.hero-brand-mark {
-  width:88px; height:88px;
-  filter:drop-shadow(0 0 16px rgba(255,255,255,0.2));
-  margin-top:2px;
-}
-.hero-brand-sub {
-  font-family:var(--bd); font-size:11px; font-weight:500;
-  letter-spacing:0.35em; text-transform:uppercase;
-  color:rgba(255,255,255,0.35);
+.hero-brand-img {
+  height:180px; width:auto;
+  mix-blend-mode:screen;
+  filter:brightness(1.1);
 }
 
 .btn-primary {
@@ -856,24 +841,9 @@ ul { list-style:none; }
       </div>
     </div>
 
-    <!-- Right — large brand mark: JH + octagon-as-K -->
+    <!-- Right — actual JHK logo image -->
     <div class="hero-brand">
-      <div class="hero-brand-inner">
-        <span class="hero-brand-jh">JH</span>
-        <!-- The octagon mark acts as the "K" in the wordmark -->
-        <svg class="hero-brand-mark" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- Outer cut-corner octagon (the K shape) -->
-          <polygon points="48,4 76,12 92,40 92,56 76,84 48,92 20,84 4,56 4,40 20,12"
-                   stroke="rgba(255,255,255,0.92)" stroke-width="3"
-                   fill="rgba(255,255,255,0.05)"/>
-          <!-- Inner rotated diamond -->
-          <polygon points="48,26 70,48 48,70 26,48"
-                   stroke="rgba(255,255,255,0.5)" stroke-width="2" fill="none"/>
-          <!-- Centre dot -->
-          <circle cx="48" cy="48" r="9" fill="rgba(255,255,255,0.95)"/>
-        </svg>
-      </div>
-      <div class="hero-brand-sub">Group of Companies</div>
+      <img src="jhk-logo.png" alt="JHK Group of Companies" class="hero-brand-img">
     </div>
   </div>
 </div>
