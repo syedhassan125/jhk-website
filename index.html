@@ -1496,25 +1496,24 @@ a, button, .p-card, .gc-card, .val-cell, .nav-btn, .slide-btn { cursor:none; }
           <rect width="700" height="580" fill="url(#dotgrid)"/>
 
           <!--
-            PAKISTAN OUTLINE
-            Clockwise from NW corner.
+            PAKISTAN OUTLINE — Natural Earth 1:110m dataset, 66 real boundary points
             x=(lon-60)*38.89, y=(37.5-lat)*38.5
           -->
           <polygon
-            points="548,23 622,19 661,65 642,116 583,146 564,173 564,192 568,231 525,288 447,346 408,384 389,423 369,461 311,500 292,519 272,519 175,473 90,476 78,461 90,404 58,308 66,250 109,212 156,173 214,134 292,115 369,96 427,77 466,46"
+            points="589,14 618,32 630,62 694,77 656,110 613,115 554,106 535,123 549,156 562,182 593,201 560,224 561,251 523,290 499,329 458,369 413,366 370,407 395,424 400,453 422,473 429,506 344,506 318,532 289,522 278,494 248,465 176,472 113,473 58,478 73,434 129,414 126,396 107,390 106,356 69,339 53,316 34,295 99,315 138,309 161,314 169,306 196,309 247,293 248,260 270,239 299,239 303,228 333,223 347,226 362,216 360,192 377,169 401,159 386,134 423,135 434,121 432,107 452,90 447,71 438,55 461,38 502,30 547,26 567,18 589,14"
             fill="rgba(255,255,255,0.03)"
-            stroke="rgba(255,255,255,0.18)"
+            stroke="rgba(255,255,255,0.2)"
             stroke-width="1.2"
             stroke-linejoin="round"
           />
 
           <!--
             KPK PROVINCE — highlighted
-            Clockwise from Khyber Pass/Afghan border.
-            All points converted from real lat/lon.
+            Clockwise from Khyber Pass/Afghan border, real lat/lon converted.
+            x=(lon-60)*38.89, y=(37.5-lat)*38.5
           -->
           <polygon
-            points="430,130 427,107 435,96 447,84 455,73 459,61 459,38 478,27 505,38 525,77 528,104 521,123 525,130 505,138 497,146 478,154 455,173 447,192 430,215 411,231 400,219 400,192 400,173 404,154 411,142 419,134"
+            points="431,131 427,108 435,96 447,84 455,73 459,62 459,38 478,27 505,38 525,77 528,104 521,123 525,131 505,139 497,146 478,154 455,173 447,192 431,215 411,231 400,219 400,192 400,173 404,154 411,142 419,134"
             fill="rgba(0,184,230,0.09)"
             stroke="rgba(0,184,230,0.45)"
             stroke-width="1.4"
@@ -1522,33 +1521,42 @@ a, button, .p-card, .gc-card, .val-cell, .nav-btn, .slide-btn { cursor:none; }
             filter="url(#kpkglow)"
           />
 
-          <!-- Province labels -->
+          <!-- Province labels — positioned at geographic centroids -->
+          <!-- Balochistan centroid ~28.5°N, 65°E → (195,345) -->
           <text font-family="Barlow Condensed,sans-serif" font-size="11" font-weight="700"
-            fill="rgba(255,255,255,0.12)" letter-spacing="3" text-anchor="middle" x="190" y="360">BALOCHISTAN</text>
+            fill="rgba(255,255,255,0.11)" letter-spacing="3" text-anchor="middle" x="195" y="345">BALOCHISTAN</text>
+          <!-- Punjab centroid ~31°N, 73°E → (505,252) -->
           <text font-family="Barlow Condensed,sans-serif" font-size="10" font-weight="700"
-            fill="rgba(255,255,255,0.12)" letter-spacing="3" text-anchor="middle" x="530" y="260">PUNJAB</text>
+            fill="rgba(255,255,255,0.11)" letter-spacing="3" text-anchor="middle" x="535" y="262">PUNJAB</text>
+          <!-- Sindh centroid ~26°N, 68.5°E → (330,442) -->
           <text font-family="Barlow Condensed,sans-serif" font-size="10" font-weight="700"
-            fill="rgba(255,255,255,0.12)" letter-spacing="3" text-anchor="middle" x="370" y="460">SINDH</text>
+            fill="rgba(255,255,255,0.11)" letter-spacing="3" text-anchor="middle" x="345" y="448">SINDH</text>
+          <!-- KPK label inside province -->
           <text font-family="Barlow Condensed,sans-serif" font-size="9" font-weight="700"
-            fill="rgba(0,184,230,0.35)" letter-spacing="2" text-anchor="middle" x="463" y="175">KPK</text>
+            fill="rgba(0,184,230,0.4)" letter-spacing="2" text-anchor="middle" x="460" y="182">KPK</text>
+          <!-- Gilgit-Baltistan ~36°N, 74.5°E → (564,58) -->
           <text font-family="Barlow Condensed,sans-serif" font-size="8" font-weight="600"
-            fill="rgba(255,255,255,0.10)" letter-spacing="2" text-anchor="middle" x="600" y="70">GILGIT-BALTISTAN</text>
+            fill="rgba(255,255,255,0.10)" letter-spacing="1" text-anchor="middle" x="598" y="72">GILGIT</text>
+          <text font-family="Barlow Condensed,sans-serif" font-size="8" font-weight="600"
+            fill="rgba(255,255,255,0.10)" letter-spacing="1" text-anchor="middle" x="598" y="83">BALTISTAN</text>
 
           <!-- Neighbor labels -->
+          <text font-family="Barlow Condensed,sans-serif" font-size="9"
+            fill="rgba(255,255,255,0.08)" letter-spacing="2" text-anchor="middle" x="120" y="210">AFGHANISTAN</text>
+          <text font-family="Barlow Condensed,sans-serif" font-size="9"
+            fill="rgba(255,255,255,0.08)" letter-spacing="2" text-anchor="middle" x="662" y="220">INDIA</text>
+          <text font-family="Barlow Condensed,sans-serif" font-size="9"
+            fill="rgba(255,255,255,0.08)" letter-spacing="2" x="28" y="448">IRAN</text>
           <text font-family="Barlow Condensed,sans-serif" font-size="8"
-            fill="rgba(255,255,255,0.09)" letter-spacing="2" x="60" y="200" transform="rotate(-60,60,200)">AFGHANISTAN</text>
-          <text font-family="Barlow Condensed,sans-serif" font-size="8"
-            fill="rgba(255,255,255,0.09)" letter-spacing="2" text-anchor="middle" x="650" y="160">INDIA</text>
-          <text font-family="Barlow Condensed,sans-serif" font-size="8"
-            fill="rgba(255,255,255,0.09)" letter-spacing="2" x="40" y="460">IRAN</text>
+            fill="rgba(255,255,255,0.08)" letter-spacing="1" text-anchor="middle" x="350" y="556">ARABIAN SEA</text>
 
-          <!-- Reference city dots (grey) for geographic context -->
-          <circle cx="272" cy="509" r="3" fill="rgba(255,255,255,0.2)"/>
-          <text font-family="Barlow Condensed,sans-serif" font-size="8" fill="rgba(255,255,255,0.2)" x="278" y="512">Karachi</text>
-          <circle cx="558" cy="229" r="3" fill="rgba(255,255,255,0.2)"/>
-          <text font-family="Barlow Condensed,sans-serif" font-size="8" fill="rgba(255,255,255,0.2)" x="563" y="232">Lahore</text>
-          <circle cx="269" cy="280" r="3" fill="rgba(255,255,255,0.2)"/>
-          <text font-family="Barlow Condensed,sans-serif" font-size="8" fill="rgba(255,255,255,0.2)" x="274" y="283">Quetta</text>
+          <!-- Reference city dots — Karachi 24.86N 67.01E=(272,507), Lahore 31.55N 74.34E=(558,229), Quetta 30.19N 66.97E=(269,281) -->
+          <circle cx="289" cy="519" r="3" fill="rgba(255,255,255,0.18)"/>
+          <text font-family="Barlow Condensed,sans-serif" font-size="8" fill="rgba(255,255,255,0.18)" x="295" y="522">Karachi</text>
+          <circle cx="558" cy="229" r="3" fill="rgba(255,255,255,0.18)"/>
+          <text font-family="Barlow Condensed,sans-serif" font-size="8" fill="rgba(255,255,255,0.18)" x="563" y="232">Lahore</text>
+          <circle cx="271" cy="281" r="3" fill="rgba(255,255,255,0.18)"/>
+          <text font-family="Barlow Condensed,sans-serif" font-size="8" fill="rgba(255,255,255,0.18)" x="276" y="284">Quetta</text>
 
           <!--
             PROJECT CITY DOTS — all at real lat/lon positions within KPK
