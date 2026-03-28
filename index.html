@@ -71,23 +71,15 @@ ul { list-style:none; }
 }
 
 /* Logo */
-.nav-logo { display:flex; align-items:center; gap:14px; flex-shrink:0; }
-.logo-mark { width:42px; height:42px; flex-shrink:0; filter:drop-shadow(0 0 8px rgba(0,184,230,0.5)); }
-.logo-words {}
-.logo-jhk {
-  font-family:var(--hd); font-weight:900; font-size:26px;
-  letter-spacing:0.06em; line-height:1; color:var(--white);
-  transition:color .3s;
-  text-shadow: 0 1px 12px rgba(0,0,0,0.6);
+.nav-logo { display:flex; align-items:center; gap:0; flex-shrink:0; }
+.logo-actual {
+  height:44px; width:auto;
+  filter: brightness(1.15) contrast(1.05);
+  transition: filter .3s;
 }
-#nav.scrolled .logo-jhk { color:var(--navy); text-shadow:none; }
-.logo-sub {
-  font-family:var(--bd); font-size:8px; font-weight:600;
-  letter-spacing:0.22em; text-transform:uppercase;
-  color:rgba(255,255,255,0.8); line-height:1.4; margin-top:3px;
-  transition:color .3s;
+#nav.scrolled .logo-actual {
+  filter: brightness(0.15) contrast(1.2) saturate(0);
 }
-#nav.scrolled .logo-sub { color:var(--muted); }
 
 /* Nav links */
 .nav-links { display:flex; gap:0; }
@@ -216,22 +208,14 @@ ul { list-style:none; }
 /* Hero brand — right side wordmark */
 .hero-brand {
   flex-shrink:0;
-  display:flex; flex-direction:column; align-items:center; gap:14px;
+  display:flex; flex-direction:column; align-items:center; gap:18px;
   border-left:1px solid rgba(255,255,255,0.08);
   padding-left:64px;
   opacity:0; animation:fadeUp .9s 1s ease forwards;
 }
-.hero-brand-inner {
-  display:flex; align-items:center; gap:0;
-}
-.hero-brand-jh {
-  font-family:var(--hd); font-weight:900;
-  font-size:100px; line-height:1; letter-spacing:-0.01em;
-  color:#fff; text-transform:uppercase;
-}
-.hero-brand-mark {
-  height:90px; width:auto;
-  margin-left:8px;
+.hero-brand-logo {
+  height:130px; width:auto;
+  filter: brightness(1.2) contrast(1.05) drop-shadow(0 4px 24px rgba(0,0,0,0.6));
 }
 .hero-brand-sub {
   font-family:var(--bd); font-size:11px; font-weight:500;
@@ -755,30 +739,121 @@ ul { list-style:none; }
   .hero-row{flex-direction:column;align-items:flex-start;gap:24px}
   .vm-panel{padding:80px 36px}
 }
+
+/* ── LOADER ──────────────────────────────────── */
+#loader {
+  position:fixed; inset:0; z-index:99999;
+  background:var(--navy);
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:48px;
+  transition:transform 1.1s cubic-bezier(.76,0,.24,1);
+}
+#loader.done { transform:translateY(-100%); pointer-events:none; }
+.loader-logo { height:90px; width:auto; animation:ldrPulse 2s ease-in-out infinite; }
+@keyframes ldrPulse { 0%,100%{opacity:.8;transform:scale(1)} 50%{opacity:1;transform:scale(1.04)} }
+.loader-bottom { display:flex; flex-direction:column; align-items:center; gap:14px; width:260px; }
+.loader-bar-wrap { width:100%; height:1px; background:rgba(255,255,255,0.08); position:relative; overflow:hidden; }
+.loader-bar { position:absolute; left:0; top:0; height:100%; width:0%; background:var(--cyan); box-shadow:0 0 10px rgba(0,184,230,0.7); }
+.loader-pct { font-family:var(--hd); font-size:11px; font-weight:500; letter-spacing:.4em; color:rgba(255,255,255,0.22); }
+.loader-lbl { font-family:var(--bd); font-size:9px; letter-spacing:.3em; text-transform:uppercase; color:rgba(255,255,255,0.12); }
+
+/* ── CURSOR ──────────────────────────────────── */
+body { cursor:none; }
+a, button, .p-card, .gc-card, .val-cell, .nav-btn, .slide-btn { cursor:none; }
+#cursor {
+  position:fixed; width:10px; height:10px;
+  background:var(--cyan); transform:rotate(45deg) translate(-50%,-50%);
+  pointer-events:none; z-index:999998;
+  transition:width .2s, height .2s;
+  mix-blend-mode:difference;
+}
+#cursor.big { width:20px; height:20px; }
+#cursor-ring {
+  position:fixed; width:36px; height:36px;
+  border:1px solid rgba(0,184,230,0.45); border-radius:50%;
+  transform:translate(-50%,-50%);
+  pointer-events:none; z-index:999997;
+  transition:width .3s, height .3s, border-color .3s;
+}
+#cursor-ring.big { width:56px; height:56px; border-color:rgba(0,184,230,0.8); }
+
+/* ── MARQUEE ─────────────────────────────────── */
+.marquee-band {
+  background:var(--navy2);
+  border-top:1px solid rgba(255,255,255,0.05);
+  border-bottom:1px solid rgba(255,255,255,0.05);
+  padding:16px 0; overflow:hidden; white-space:nowrap;
+}
+.marquee-track { display:inline-block; animation:mqScroll 32s linear infinite; }
+.marquee-track:hover { animation-play-state:paused; }
+@keyframes mqScroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+.mq-item {
+  display:inline-block;
+  font-family:var(--hd); font-size:13px; font-weight:600;
+  letter-spacing:.22em; text-transform:uppercase;
+  color:rgba(255,255,255,0.22); padding:0 32px;
+}
+.mq-dot {
+  display:inline-block; width:4px; height:4px;
+  background:var(--cyan); border-radius:50%;
+  vertical-align:middle; margin:0 4px; opacity:.5;
+}
+
+/* ── PROJECT CARD PHOTO OVERLAY ──────────────── */
+.p-card-art { opacity:.09; }
+.p-card-overlay { background:rgba(4,10,20,0.52); }
+
+/* ── MAP SECTION ─────────────────────────────── */
+#footprint { background:var(--navy); padding:120px 0; position:relative; overflow:hidden; }
+.fp-grid { display:grid; grid-template-columns:1fr 1.5fr; gap:80px; align-items:center; }
+.fp-left {}
+.fp-h {
+  font-family:var(--hd); font-weight:900;
+  font-size:clamp(44px,5.5vw,70px); line-height:.9;
+  letter-spacing:-.02em; text-transform:uppercase; color:#fff; margin-bottom:28px;
+}
+.fp-h span { color:var(--cyan); }
+.fp-desc { font-size:15px; font-weight:300; line-height:1.85; color:rgba(255,255,255,0.48); max-width:360px; margin-bottom:48px; }
+.fp-stats { display:flex; flex-direction:column; gap:16px; }
+.fp-stat {
+  display:flex; align-items:center; gap:20px;
+  padding:18px 22px; border:1px solid rgba(255,255,255,0.06);
+  background:rgba(255,255,255,0.02); position:relative; overflow:hidden;
+}
+.fp-stat::before { content:''; position:absolute; left:0; top:0; bottom:0; width:2px; background:var(--cyan); }
+.fp-stat-n { font-family:var(--hd); font-size:40px; font-weight:900; color:var(--cyan); line-height:1; flex-shrink:0; }
+.fp-stat-l { font-family:var(--bd); font-size:11px; font-weight:400; letter-spacing:.12em; text-transform:uppercase; color:rgba(255,255,255,0.4); line-height:1.55; }
+.fp-map { width:100%; height:auto; display:block; }
+.city-pulse { animation:cpulse 2.5s ease-in-out infinite; }
+.city-ring  { animation:cring 2.5s ease-in-out infinite; }
+@keyframes cpulse { 0%,100%{r:5;opacity:1} 50%{r:7;opacity:.75} }
+@keyframes cring  { 0%{r:12;opacity:.5} 100%{r:26;opacity:0} }
+.fp-city-lbl { font-family:'Barlow Condensed',sans-serif; font-size:11px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; fill:rgba(255,255,255,0.72); }
+.fp-city-sub { font-family:'Barlow Condensed',sans-serif; font-size:9px; fill:rgba(0,184,230,0.65); letter-spacing:.08em; }
+.fp-conn { stroke:rgba(0,184,230,0.18); stroke-width:1; stroke-dasharray:4 6; fill:none; }
+
   </style>
 </head>
 <body>
 
+<!-- LOADER -->
+<div id="loader">
+  <img src="jhk-logo-actual.png" alt="" class="loader-logo">
+  <div class="loader-bottom">
+    <div class="loader-bar-wrap"><div class="loader-bar" id="loader-bar"></div></div>
+    <div class="loader-pct" id="loader-pct">0%</div>
+    <div class="loader-lbl">Loading</div>
+  </div>
+</div>
+
+<!-- CUSTOM CURSOR -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
 <!-- ═══════════════════ NAVIGATION ═════════════════════ -->
 <nav id="nav">
   <a href="#" class="nav-logo">
-    <!-- JHK actual logo: octagonal eye mark + JHK wordmark -->
-    <svg class="logo-mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- Outer octagon (the JHK brand mark — cut-corner diamond shape) -->
-      <polygon points="24,2 38,6 46,20 46,28 38,42 24,46 10,42 2,28 2,20 10,6"
-               stroke="rgba(255,255,255,0.95)" stroke-width="1.8"
-               fill="rgba(255,255,255,0.06)"/>
-      <!-- Inner rotated diamond -->
-      <polygon points="24,12 36,24 24,36 12,24"
-               stroke="rgba(255,255,255,0.55)" stroke-width="1.2"
-               fill="none"/>
-      <!-- Centre circle dot -->
-      <circle cx="24" cy="24" r="5.5" fill="rgba(255,255,255,0.95)"/>
-    </svg>
-    <div class="logo-words">
-      <div class="logo-jhk">JHK</div>
-      <div class="logo-sub">Group of Companies</div>
-    </div>
+    <img src="jhk-logo-actual.png" alt="JHK Group of Companies" class="logo-actual">
   </a>
 
   <ul class="nav-links">
@@ -854,18 +929,39 @@ ul { list-style:none; }
       </div>
     </div>
 
-    <!-- Right — JHK: Barlow Condensed text + actual mark extracted from logo -->
+    <!-- Right — actual JHK logo -->
     <div class="hero-brand">
-      <div class="hero-brand-inner">
-        <span class="hero-brand-jh">JHK</span>
-        <img src="jhk-mark.png" alt="" class="hero-brand-mark">
-      </div>
+      <img src="jhk-logo-actual.png" alt="JHK Group of Companies" class="hero-brand-logo">
       <div class="hero-brand-sub">Group of Companies</div>
     </div>
   </div>
 </div>
 
 </section>
+
+<!-- MARQUEE -->
+<div class="marquee-band">
+  <div class="marquee-track">
+    <span class="mq-item">EST. 1920</span><span class="mq-dot"></span>
+    <span class="mq-item">Envisioning Progress</span><span class="mq-dot"></span>
+    <span class="mq-item">World Bank Funded</span><span class="mq-dot"></span>
+    <span class="mq-item">ADB Approved</span><span class="mq-dot"></span>
+    <span class="mq-item">AIIB Partner</span><span class="mq-dot"></span>
+    <span class="mq-item">PKR 25BN+ Delivered</span><span class="mq-dot"></span>
+    <span class="mq-item">200+ KM of Roads</span><span class="mq-dot"></span>
+    <span class="mq-item">JHK Group of Companies</span><span class="mq-dot"></span>
+    <span class="mq-item">Khyber Pakhtunkhwa</span><span class="mq-dot"></span>
+    <span class="mq-item">EST. 1920</span><span class="mq-dot"></span>
+    <span class="mq-item">Envisioning Progress</span><span class="mq-dot"></span>
+    <span class="mq-item">World Bank Funded</span><span class="mq-dot"></span>
+    <span class="mq-item">ADB Approved</span><span class="mq-dot"></span>
+    <span class="mq-item">AIIB Partner</span><span class="mq-dot"></span>
+    <span class="mq-item">PKR 25BN+ Delivered</span><span class="mq-dot"></span>
+    <span class="mq-item">200+ KM of Roads</span><span class="mq-dot"></span>
+    <span class="mq-item">JHK Group of Companies</span><span class="mq-dot"></span>
+    <span class="mq-item">Khyber Pakhtunkhwa</span><span class="mq-dot"></span>
+  </div>
+</div>
 
 <!-- ═══════════════════ STATS ═══════════════════════════ -->
 <div class="stats-bar">
@@ -1099,7 +1195,7 @@ ul { list-style:none; }
 
       <!-- Featured card -->
       <div class="p-card feat up status-active">
-        <div class="p-card-bg bg-road1">
+        <div class="p-card-bg" style="background-image:url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1400&q=85&fit=crop');background-size:cover;background-position:center">
           <svg class="p-card-art" viewBox="0 0 900 400" fill="none"><path d="M0 300 Q225 240 450 200 T900 120" stroke="#00b8e6" stroke-width="2.5"/><path d="M0 260 Q225 200 450 160 T900 80" stroke="#00b8e6" stroke-width="1.2" opacity=".4"/><path d="M0 340 Q225 280 450 240 T900 160" stroke="#00b8e6" stroke-width=".7" opacity=".25"/><line x1="0" y1="380" x2="900" y2="380" stroke="#00b8e6" stroke-width=".5" opacity=".2"/></svg>
         </div>
         <div class="p-card-overlay"></div>
@@ -1118,7 +1214,7 @@ ul { list-style:none; }
 
       <!-- Card 2 -->
       <div class="p-card up status-active" style="transition-delay:.05s">
-        <div class="p-card-bg bg-road2">
+        <div class="p-card-bg" style="background-image:url('https://images.unsplash.com/photo-1590579491624-f98f36d4c763?w=800&q=85&fit=crop');background-size:cover;background-position:center">
           <svg class="p-card-art" viewBox="0 0 480 360" fill="none"><path d="M0 200 C120 180 240 150 360 170 S480 210 480 190" stroke="#00b8e6" stroke-width="2"/><circle cx="240" cy="180" r="50" stroke="#00b8e6" stroke-width=".8" opacity=".35"/><circle cx="240" cy="180" r="80" stroke="#00b8e6" stroke-width=".4" opacity=".2"/></svg>
         </div>
         <div class="p-card-overlay"></div>
@@ -1137,7 +1233,7 @@ ul { list-style:none; }
 
       <!-- Card 3 -->
       <div class="p-card up status-active" style="transition-delay:.1s">
-        <div class="p-card-bg bg-urban">
+        <div class="p-card-bg" style="background-image:url('https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800&q=85&fit=crop');background-size:cover;background-position:center">
           <svg class="p-card-art" viewBox="0 0 480 360" fill="none"><rect x="60" y="40" width="50" height="320" stroke="#00b8e6" stroke-width="1.2"/><rect x="130" y="20" width="60" height="340" stroke="#00b8e6" stroke-width="1.2"/><rect x="210" y="60" width="44" height="300" stroke="#00b8e6" stroke-width="1"/><rect x="274" y="30" width="70" height="330" stroke="#00b8e6" stroke-width="1.2"/><rect x="364" y="70" width="50" height="290" stroke="#00b8e6" stroke-width=".8"/><line x1="0" y1="355" x2="480" y2="355" stroke="#00b8e6" stroke-width=".6" opacity=".4"/></svg>
         </div>
         <div class="p-card-overlay"></div>
@@ -1156,7 +1252,7 @@ ul { list-style:none; }
 
       <!-- Card 4 -->
       <div class="p-card up status-active" style="transition-delay:.15s">
-        <div class="p-card-bg bg-park">
+        <div class="p-card-bg" style="background-image:url('https://images.unsplash.com/photo-1519331379826-f10be5486c6f?w=800&q=85&fit=crop');background-size:cover;background-position:center">
           <svg class="p-card-art" viewBox="0 0 480 360" fill="none"><circle cx="140" cy="240" r="110" stroke="#00b8e6" stroke-width="1.2"/><circle cx="320" cy="210" r="90" stroke="#00b8e6" stroke-width="1"/><path d="M60 340 Q140 260 220 300 Q300 340 380 290" stroke="#00b8e6" stroke-width="2"/></svg>
         </div>
         <div class="p-card-overlay"></div>
@@ -1175,7 +1271,7 @@ ul { list-style:none; }
 
       <!-- Card 5 -->
       <div class="p-card up status-active" style="transition-delay:.2s">
-        <div class="p-card-bg bg-abb">
+        <div class="p-card-bg" style="background-image:url('https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800&q=85&fit=crop');background-size:cover;background-position:center">
           <svg class="p-card-art" viewBox="0 0 480 360" fill="none"><path d="M40 300 Q100 240 180 260 Q260 280 320 200 Q380 120 440 180" stroke="#00b8e6" stroke-width="2"/><polygon points="240,120 270,180 240,160 210,180" stroke="#00b8e6" stroke-width="1.2" fill="none"/></svg>
         </div>
         <div class="p-card-overlay"></div>
@@ -1194,7 +1290,7 @@ ul { list-style:none; }
 
       <!-- Card 6 -->
       <div class="p-card up status-active" style="transition-delay:.25s">
-        <div class="p-card-bg bg-kohat">
+        <div class="p-card-bg" style="background-image:url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800&q=85&fit=crop');background-size:cover;background-position:center">
           <svg class="p-card-art" viewBox="0 0 480 360" fill="none"><rect x="80" y="100" width="100" height="260" stroke="#00b8e6" stroke-width="1.2" rx="4"/><rect x="210" y="70" width="130" height="290" stroke="#00b8e6" stroke-width="1.2" rx="4"/><circle cx="130" cy="60" r="36" stroke="#00b8e6" stroke-width="1"/><circle cx="275" cy="46" r="28" stroke="#00b8e6" stroke-width="1"/></svg>
         </div>
         <div class="p-card-overlay"></div>
@@ -1230,7 +1326,7 @@ ul { list-style:none; }
     <div class="proj-grid">
 
       <div class="p-card up status-done">
-        <div class="p-card-bg bg-swat"><svg class="p-card-art" viewBox="0 0 480 360" fill="none"><path d="M0 250 C80 230 160 200 240 220 S480 260 480 240" stroke="#00b8e6" stroke-width="2.2"/><path d="M0 200 Q240 160 480 200" stroke="#00b8e6" stroke-width=".8" opacity=".35"/></svg></div>
+        <div class="p-card-bg" style="background-image:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=85&fit=crop');background-size:cover;background-position:center"><svg class="p-card-art" viewBox="0 0 480 360" fill="none"><path d="M0 250 C80 230 160 200 240 220 S480 260 480 240" stroke="#00b8e6" stroke-width="2.2"/><path d="M0 200 Q240 160 480 200" stroke="#00b8e6" stroke-width=".8" opacity=".35"/></svg></div>
         <div class="p-card-overlay"></div>
         <div class="p-card-body">
           <span class="p-badge done">Completed</span>
@@ -1246,7 +1342,7 @@ ul { list-style:none; }
       </div>
 
       <div class="p-card up status-done" style="transition-delay:.08s">
-        <div class="p-card-bg bg-khai"><svg class="p-card-art" viewBox="0 0 480 360" fill="none"><line x1="0" y1="180" x2="480" y2="180" stroke="#00b8e6" stroke-width="2.2"/><line x1="0" y1="165" x2="480" y2="165" stroke="#00b8e6" stroke-width=".7" opacity=".35"/><line x1="0" y1="195" x2="480" y2="195" stroke="#00b8e6" stroke-width=".7" opacity=".35"/><circle cx="240" cy="180" r="40" stroke="#00b8e6" stroke-width=".8" opacity=".3"/></svg></div>
+        <div class="p-card-bg" style="background-image:url('https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=800&q=85&fit=crop');background-size:cover;background-position:center"><svg class="p-card-art" viewBox="0 0 480 360" fill="none"><line x1="0" y1="180" x2="480" y2="180" stroke="#00b8e6" stroke-width="2.2"/><line x1="0" y1="165" x2="480" y2="165" stroke="#00b8e6" stroke-width=".7" opacity=".35"/><line x1="0" y1="195" x2="480" y2="195" stroke="#00b8e6" stroke-width=".7" opacity=".35"/><circle cx="240" cy="180" r="40" stroke="#00b8e6" stroke-width=".8" opacity=".3"/></svg></div>
         <div class="p-card-overlay"></div>
         <div class="p-card-body">
           <span class="p-badge done">Completed</span>
@@ -1262,7 +1358,7 @@ ul { list-style:none; }
       </div>
 
       <div class="p-card up status-done" style="transition-delay:.16s">
-        <div class="p-card-bg bg-opf"><svg class="p-card-art" viewBox="0 0 480 360" fill="none"><rect x="40" y="40" width="50" height="320" stroke="#00b8e6" stroke-width="1.2"/><rect x="104" y="20" width="50" height="340" stroke="#00b8e6" stroke-width="1.2"/><rect x="168" y="34" width="50" height="326" stroke="#00b8e6" stroke-width="1.2"/><rect x="232" y="52" width="50" height="308" stroke="#00b8e6" stroke-width="1"/><rect x="296" y="38" width="50" height="322" stroke="#00b8e6" stroke-width="1"/><rect x="360" y="44" width="50" height="316" stroke="#00b8e6" stroke-width="1"/></svg></div>
+        <div class="p-card-bg" style="background-image:url('https://images.unsplash.com/photo-1460317442991-0ec209397118?w=800&q=85&fit=crop');background-size:cover;background-position:center"><svg class="p-card-art" viewBox="0 0 480 360" fill="none"><rect x="40" y="40" width="50" height="320" stroke="#00b8e6" stroke-width="1.2"/><rect x="104" y="20" width="50" height="340" stroke="#00b8e6" stroke-width="1.2"/><rect x="168" y="34" width="50" height="326" stroke="#00b8e6" stroke-width="1.2"/><rect x="232" y="52" width="50" height="308" stroke="#00b8e6" stroke-width="1"/><rect x="296" y="38" width="50" height="322" stroke="#00b8e6" stroke-width="1"/><rect x="360" y="44" width="50" height="316" stroke="#00b8e6" stroke-width="1"/></svg></div>
         <div class="p-card-overlay"></div>
         <div class="p-card-body">
           <span class="p-badge done">Completed</span>
@@ -1346,12 +1442,166 @@ ul { list-style:none; }
   </div>
 </section>
 
+<!-- ═══════════════════ PROJECT FOOTPRINT MAP ══════════ -->
+<section id="footprint">
+  <div class="container">
+    <div class="fp-grid">
+
+      <!-- Left: copy + stats -->
+      <div class="fp-left up">
+        <div class="label-tag" style="color:var(--cyan)">Our Reach</div>
+        <h2 class="fp-h">Building<br><span>Across KPK</span></h2>
+        <p class="fp-desc">From the valleys of Swat to the streets of Peshawar — JHK's infrastructure projects span the breadth of Khyber Pakhtunkhwa, connecting communities and shaping the province's future.</p>
+        <div class="fp-stats">
+          <div class="fp-stat">
+            <div class="fp-stat-n">9</div>
+            <div class="fp-stat-l">Districts &<br>Cities Reached</div>
+          </div>
+          <div class="fp-stat">
+            <div class="fp-stat-n">200<sub style="font-size:22px;color:rgba(0,184,230,0.5)">+ KM</sub></div>
+            <div class="fp-stat-l">Roads Built<br>& Rehabilitated</div>
+          </div>
+          <div class="fp-stat">
+            <div class="fp-stat-n">PKR 25B<sub style="font-size:22px;color:rgba(0,184,230,0.5)">+</sub></div>
+            <div class="fp-stat-l">Total Project<br>Value Executed</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: SVG network map -->
+      <div class="right">
+        <svg class="fp-map" viewBox="0 0 660 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+          <!-- Dot grid background -->
+          <defs>
+            <pattern id="dotgrid" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
+              <circle cx="1" cy="1" r="1" fill="rgba(0,184,230,0.08)"/>
+            </pattern>
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="3" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <rect width="660" height="480" fill="url(#dotgrid)"/>
+
+          <!-- KPK region subtle fill -->
+          <polygon points="80,380 120,260 90,160 130,80 200,50 300,40 420,60 500,110 560,180 580,280 520,360 440,410 340,430 220,430 140,410"
+            fill="rgba(0,184,230,0.04)" stroke="rgba(0,184,230,0.12)" stroke-width="1.5"/>
+
+          <!-- Road connections -->
+          <!-- Peshawar → Charsadda -->
+          <line class="fp-conn" x1="290" y1="230" x2="340" y2="190"/>
+          <!-- Peshawar → Khyber -->
+          <line class="fp-conn" x1="290" y1="230" x2="210" y2="210"/>
+          <!-- Peshawar → Mohmand -->
+          <line class="fp-conn" x1="290" y1="230" x2="240" y2="175"/>
+          <!-- Peshawar → Kohat -->
+          <line class="fp-conn" x1="290" y1="230" x2="275" y2="310"/>
+          <!-- Charsadda → Swat -->
+          <line class="fp-conn" x1="340" y1="190" x2="400" y2="115"/>
+          <!-- Charsadda → Mardan -->
+          <line class="fp-conn" x1="340" y1="190" x2="410" y2="170"/>
+          <!-- Kohat → Abbottabad -->
+          <line class="fp-conn" x1="275" y1="310" x2="470" y2="270"/>
+          <!-- Abbottabad → Islamabad -->
+          <line class="fp-conn" x1="470" y1="270" x2="545" y2="320"/>
+
+          <!-- Cities — Peshawar (hub) -->
+          <g filter="url(#glow)">
+            <circle class="city-ring" cx="290" cy="230" r="12" stroke="#00b8e6" stroke-width="1" fill="none"/>
+            <circle class="city-pulse" cx="290" cy="230" r="5" fill="#00b8e6"/>
+          </g>
+          <text class="fp-city-lbl" x="306" y="227">Peshawar</text>
+          <text class="fp-city-sub" x="306" y="240">2 Active Projects</text>
+
+          <!-- Swat -->
+          <g filter="url(#glow)" style="animation-delay:.3s">
+            <circle class="city-ring" cx="400" cy="115" r="12" stroke="#00b8e6" stroke-width="1" fill="none" style="animation-delay:.3s"/>
+            <circle class="city-pulse" cx="400" cy="115" r="5" fill="#00b8e6" style="animation-delay:.3s"/>
+          </g>
+          <text class="fp-city-lbl" x="416" y="112">Swat</text>
+          <text class="fp-city-sub" x="416" y="125">Road Rehabilitation</text>
+
+          <!-- Charsadda -->
+          <g style="animation-delay:.6s">
+            <circle class="city-ring" cx="340" cy="190" r="12" stroke="#00b8e6" stroke-width="1" fill="none" style="animation-delay:.6s"/>
+            <circle class="city-pulse" cx="340" cy="190" r="4" fill="rgba(0,184,230,0.8)" style="animation-delay:.6s"/>
+          </g>
+          <text class="fp-city-lbl" x="354" y="186">Charsadda</text>
+          <text class="fp-city-sub" x="354" y="199">Rural Connectivity</text>
+
+          <!-- Khyber -->
+          <g style="animation-delay:.9s">
+            <circle class="city-ring" cx="210" cy="210" r="12" stroke="#00b8e6" stroke-width="1" fill="none" style="animation-delay:.9s"/>
+            <circle class="city-pulse" cx="210" cy="210" r="4" fill="rgba(0,184,230,0.8)" style="animation-delay:.9s"/>
+          </g>
+          <text class="fp-city-lbl" x="140" y="206">Khyber</text>
+          <text class="fp-city-sub" x="140" y="219">Rural Access</text>
+
+          <!-- Mohmand -->
+          <g style="animation-delay:1.2s">
+            <circle class="city-pulse" cx="240" cy="175" r="4" fill="rgba(0,184,230,0.7)" style="animation-delay:1.2s"/>
+          </g>
+          <text class="fp-city-lbl" x="248" y="172">Mohmand</text>
+
+          <!-- Mardan -->
+          <g style="animation-delay:1.5s">
+            <circle class="city-pulse" cx="410" cy="170" r="4" fill="rgba(0,184,230,0.7)" style="animation-delay:1.5s"/>
+          </g>
+          <text class="fp-city-lbl" x="418" y="167">Mardan</text>
+
+          <!-- Kohat -->
+          <g filter="url(#glow)" style="animation-delay:.4s">
+            <circle class="city-ring" cx="275" cy="310" r="12" stroke="#00b8e6" stroke-width="1" fill="none" style="animation-delay:.4s"/>
+            <circle class="city-pulse" cx="275" cy="310" r="5" fill="#00b8e6" style="animation-delay:.4s"/>
+          </g>
+          <text class="fp-city-lbl" x="291" y="307">Kohat</text>
+          <text class="fp-city-sub" x="291" y="320">Community Centre</text>
+
+          <!-- Abbottabad -->
+          <g filter="url(#glow)" style="animation-delay:.7s">
+            <circle class="city-ring" cx="470" cy="270" r="12" stroke="#00b8e6" stroke-width="1" fill="none" style="animation-delay:.7s"/>
+            <circle class="city-pulse" cx="470" cy="270" r="5" fill="#00b8e6" style="animation-delay:.7s"/>
+          </g>
+          <text class="fp-city-lbl" x="486" y="267">Abbottabad</text>
+          <text class="fp-city-sub" x="486" y="280">Adventure Park</text>
+
+          <!-- Islamabad -->
+          <g filter="url(#glow)" style="animation-delay:1s">
+            <circle class="city-ring" cx="545" cy="320" r="12" stroke="#00b8e6" stroke-width="1" fill="none" style="animation-delay:1s"/>
+            <circle class="city-pulse" cx="545" cy="320" r="5" fill="#00b8e6" style="animation-delay:1s"/>
+          </g>
+          <text class="fp-city-lbl" x="561" y="317">Islamabad</text>
+          <text class="fp-city-sub" x="561" y="330">OPF Housing</text>
+
+          <!-- Compass rose top-right -->
+          <g opacity="0.2" transform="translate(600,60)">
+            <line x1="0" y1="-22" x2="0" y2="22" stroke="#00b8e6" stroke-width="1.2"/>
+            <line x1="-22" y1="0" x2="22" y2="0" stroke="#00b8e6" stroke-width="1.2"/>
+            <polygon points="0,-22 4,-10 -4,-10" fill="#00b8e6"/>
+            <text font-family="Barlow Condensed,sans-serif" font-size="9" fill="#00b8e6" text-anchor="middle" y="-26" letter-spacing="1">N</text>
+          </g>
+
+          <!-- Scale bar bottom-left -->
+          <g opacity="0.25" transform="translate(60,445)">
+            <line x1="0" y1="0" x2="60" y2="0" stroke="#00b8e6" stroke-width="1"/>
+            <line x1="0" y1="-4" x2="0" y2="4" stroke="#00b8e6" stroke-width="1"/>
+            <line x1="60" y1="-4" x2="60" y2="4" stroke="#00b8e6" stroke-width="1"/>
+            <text font-family="Barlow Condensed,sans-serif" font-size="9" fill="#00b8e6" text-anchor="middle" x="30" y="-8" letter-spacing="1">~100 KM</text>
+          </g>
+
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ═══════════════════ FOOTER ══════════════════════════ -->
 <footer id="footer">
   <div class="container">
     <div class="footer-top">
       <div class="foot-brand">
-        <div class="foot-jhk">JHK</div>
+        <img src="jhk-logo-actual.png" alt="JHK" style="height:52px;width:auto;filter:brightness(1.1);margin-bottom:4px;">
         <div class="foot-tag">Envisioning Progress</div>
         <div class="foot-copy">JHK Group of Companies<br>Building Pakistan's infrastructure<br>since 1920. KPK · Islamabad · Swat</div>
       </div>
@@ -1390,6 +1640,43 @@ ul { list-style:none; }
 </footer>
 
 <script>
+/* ── Loader ── */
+(function(){
+  const ldr = document.getElementById('loader');
+  const bar = document.getElementById('loader-bar');
+  const pct = document.getElementById('loader-pct');
+  let p = 0;
+  const iv = setInterval(()=>{
+    p = Math.min(p + Math.random()*14 + 4, 100);
+    bar.style.width = p + '%';
+    pct.textContent = Math.floor(p) + '%';
+    if(p >= 100){
+      clearInterval(iv);
+      bar.style.width = '100%';
+      pct.textContent = '100%';
+      setTimeout(()=> ldr.classList.add('done'), 350);
+    }
+  }, 110);
+})();
+
+/* ── Custom cursor ── */
+(function(){
+  const cur = document.getElementById('cursor');
+  const ring = document.getElementById('cursor-ring');
+  if(!cur) return;
+  let cx=0,cy=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{ cx=e.clientX; cy=e.clientY; cur.style.left=cx+'px'; cur.style.top=cy+'px'; },{passive:true});
+  (function animRing(){
+    rx+=(cx-rx)*.13; ry+=(cy-ry)*.13;
+    ring.style.left=rx+'px'; ring.style.top=ry+'px';
+    requestAnimationFrame(animRing);
+  })();
+  document.querySelectorAll('a,button,.p-card,.gc-card,.val-cell,.nav-btn,.slide-btn,.partner-item').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{ cur.classList.add('big'); ring.classList.add('big'); });
+    el.addEventListener('mouseleave',()=>{ cur.classList.remove('big'); ring.classList.remove('big'); });
+  });
+})();
+
 /* ── Nav scroll ── */
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
